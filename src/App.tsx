@@ -3,6 +3,8 @@ import "./App.css";
 import { JavaScriptSvg } from "./components/Icons";
 import { Start } from "./components/Start";
 import { useQuestionsStore } from "./store/questions";
+import { Game } from "./components/Game";
+
 
 function App() {
 
@@ -23,7 +25,10 @@ function App() {
           </Typography>
         </Stack>
 
-        <Start />
+        {questions.length === 0 && <Start />}
+        {questions.length > 0 && <Game />}
+
+        
       </Container>
     </main>
   );
