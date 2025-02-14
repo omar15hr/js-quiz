@@ -1,6 +1,7 @@
 import { Container, Stack, Typography } from "@mui/material";
 import "./App.css";
 import { JavaScriptSvg } from "./components/Icons";
+import { Start } from "./components/Start";
 
 function App() {
   return (
@@ -13,10 +14,12 @@ function App() {
           justifyContent={"center"}
         >
           <JavaScriptSvg />
-          <Typography variant="h2" component="h1" gutterBottom>
+          <Typography variant="h3" component="h1" gutterBottom>
             JavaScript Quizz
           </Typography>
         </Stack>
+
+        <Start />
       </Container>
     </main>
   );
