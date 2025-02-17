@@ -1,23 +1,27 @@
 import {
   Card,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
 import { useQuestionsStore } from "../store/questions";
 import { type Question as QuestionType } from "../interfaces/types";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { gradientDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
   const { correctAnswer, userSelectedAnswer } = info;
 
   if (userSelectedAnswer == null) return "transparent";
-  if (index !== correctAnswer && index !== userSelectedAnswer) return 'trasnparent';
-  if (index === correctAnswer) return 'green';
-  if (index === userSelectedAnswer) return 'red';
+  if (index !== correctAnswer && index !== userSelectedAnswer)
+    return "trasnparent";
+  if (index === correctAnswer) return "green";
+  if (index === userSelectedAnswer) return "red";
 
   return "transparent";
 };
@@ -60,12 +64,38 @@ const Question = ({ info }: { info: QuestionType }) => {
 export function Game() {
   const questions = useQuestionsStore((state) => state.questions);
   const currentQuestion = useQuestionsStore((state) => state.currentQuestion);
+  const goNextQuestion = useQuestionsStore((state) => state.goNextQuestion);
+  const goPreviousQuestion = useQuestionsStore(
+    (state) => state.goPreviousQuestion
+  );
 
   const questionInfo = questions[currentQuestion];
 
   return (
-    <div>
+    <>
+      <Stack
+        direction="row"
+        gap={2}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <IconButton
+          onClick={goPreviousQuestion}
+          disabled={currentQuestion === 0}
+        >
+          <ArrowBackIosNew />
+        </IconButton>
+
+        {currentQuestion + 1} / {questions.length}
+
+        <IconButton
+          onClick={goNextQuestion}
+          disabled={currentQuestion >= questions.length - 1}
+        >
+          <ArrowForwardIos />
+        </IconButton>
+      </Stack>
       <Question info={questionInfo} />
-    </div>
+    </>
   );
 }
