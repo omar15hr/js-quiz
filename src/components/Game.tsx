@@ -13,6 +13,7 @@ import { type Question as QuestionType } from "../interfaces/types";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { gradientDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { Footer } from "./Footer";
 
 const getBackgroundColor = (info: QuestionType, index: number) => {
   const { correctAnswer, userSelectedAnswer } = info;
@@ -96,6 +97,7 @@ export function Game() {
         </IconButton>
       </Stack>
       <Question info={questionInfo} />
+      <Footer />
     </>
   );
 }
